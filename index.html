@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web Component Context</title>
+
+    <style>
+      html,
+      body {
+        font-family: sans-serif;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <theme-provider mode="light">
+      <themed-button></themed-button>
+    </theme-provider>
+
+    <script type="module" src="/app.js"></script>
+    <script>
+      const buttons = document.querySelectorAll("themed-button");
+
+      buttons.forEach((button) =>
+        button.addEventListener("click", () => {
+          const provider = button.closest("theme-provider");
+
+          if (!provider) {
+            console.log("No provider found for", button);
+            return;
+          }
+
+          const newMode = provider?.toggleTheme();
+          console.log("New mode", newMode);
+        }),
+      );
+    </script>
+  </body>
+</html>
