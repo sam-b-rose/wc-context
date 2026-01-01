@@ -1,6 +1,10 @@
 /**
  * Request event that carries a context value to specify what data to request
  * and a callback which will receive the data.
+ *
+ * @property {string|symbol} context Context key identifier
+ * @property {function(*, function(): void): void} callback Callback function that receives value and unsubscribe
+ * @property {boolean} subscribe Whether to subscribe to updates
  */
 class ContextRequestEvent extends Event {
   static eventName = "context-request";
@@ -9,6 +13,11 @@ class ContextRequestEvent extends Event {
   callback;
   subscribe;
 
+  /**
+   * @param {string|symbol} context Context key identifier
+   * @param {function(*, function(): void): void} callback Callback function that receives value and unsubscribe
+   * @param {boolean} subscribe Whether to subscribe to updates
+   */
   constructor(context, callback, subscribe = false) {
     super(ContextRequestEvent.eventName, {
       bubbles: true,
@@ -27,7 +36,7 @@ class ContextRequestEvent extends Event {
  * @param {HTMLElement} element Element to contain the context data and respond to requests
  * @param {string|symbol} context Unique key identifier for the context
  * @param {*} initialValue Data to store in the context
- * @returns Context object with methods getValue, update, and dispose
+ * @returns {{getValue: function(): *, update: function(*): void, dispose: function(): void}} Context object with methods getValue, update, and dispose
  */
 export function provideContext(element, context, initialValue) {
   let currentValue = initialValue;
@@ -72,20 +81,13 @@ export function provideContext(element, context, initialValue) {
 }
 
 /**
- * @callback ContextRequestCallback
- * @template T Type of the requested context's value
- * @param {T} value Value of the requested context
- * @returns {void}
- */
-
-/**
  * Dispatches a context request event to get data from a parent context
  *
  * @param {HTMLElement} element Element which to dispatch the context request event
  * @param {string|symbol} context Context key to specify which data to request
- * @param {ContextRequestCallback} callback Callback to run when the context request is fulfilled or updated
+ * @param {function(*): void} callback Callback to run when the context request is fulfilled or updated
  * @param {boolean} subscribe Subscribe to future context updates
- * @returns {function(): void} Unsubscribes from the context}
+ * @returns {function(): void} Unsubscribes from the context
  */
 export function consumeContext(element, context, callback, subscribe = true) {
   let unsubscribeFn;
