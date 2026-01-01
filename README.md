@@ -4,6 +4,24 @@ This project implements a small pub-sub style context mechanism for native Web C
 
 The implementation is inspired by the Web Components Context protocol proposal, but is intentionally minimal and exploratory rather than a full implementation.
 
+## Running the Demo
+
+To run the demo with live reloading, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/wc-context.git
+   cd wc-context
+   ```
+
+2. Start the development server:
+   ```bash
+   npx live-server .
+   ```
+
+3. Open your browser and navigate to `http://localhost:8080` to see the demo in action.
+4. (Optional) Run tests by navigating to `http://localhost:8080/tests.html`.
+
 ## What currently works
 
 ### `context.js`
