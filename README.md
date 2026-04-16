@@ -22,7 +22,7 @@ To run the demo with live reloading, follow these steps:
 3. Open your browser and navigate to `http://localhost:8080` to see the demo in action.
 4. (Optional) Run tests by navigating to `http://localhost:8080/tests.html`.
 
-## What currently works
+## Project structure
 
 ### `context.js`
 
@@ -45,26 +45,3 @@ To run the demo with live reloading, follow these steps:
 ### `tests.html` / `context.test.js`
 
 - Basic tests covering `provideContext` and `consumeContext`
-
-## Pairing focus
-
-One area that is currently underspecified is how **multiple providers for the same context** should behave (for example, nested `ThemeProvider` elements).
-
-During the pairing session, I’d like to:
-
-- Decide on a clear resolution rule (e.g. nearest provider wins)
-- Reason through how DOM event bubbling affects that behavior
-- Adjust the implementation to make the behavior explicit and well-defined
-
-The goal is to explore event flow, lifecycle, and tradeoffs together rather than to build a complete framework.
-
-## Other areas (optional)
-
-If time permits, or if another direction seems more interesting during pairing, we could also explore:
-
-- Error handling when no provider exists
-- Edge cases around multiple subscriptions
-- How context behaves when components are moved in the DOM
-- Improving tests or test coverage
-
-I’m open to adjusting focus based on the conversation.
